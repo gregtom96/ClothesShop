@@ -16,9 +16,28 @@ h1{
     grid-column-start: 3;
     margin: auto;
     background-color: white;
+    position: relative;
+    display: inline-block;
 }
 img[alt="panier"]{
     width: 30px;
+}
+.menu{
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+button[class="total"]{
+    background-color: yellow;
+    width: 150px;
+    height: 40px;
+    margin: 0;
+}
+.hover-image:hover + .menu {
+    display: block;
 }
 main{
     display: grid;
@@ -45,7 +64,7 @@ main{
 .element img:hover{
 	transform: scale(1.1);
 }
-button{
+main button{
     position: relative;
     z-index: 2; /*z-index supérieur à celui de l'image donc apparaitra devant */
     width: 95%;
