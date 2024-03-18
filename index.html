@@ -7,6 +7,7 @@
         <title>Shop</title>
         <link href="index.css" rel="stylesheet">
         <script src="menu_panier.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
@@ -20,7 +21,7 @@
                 <div class="panier">
                     <img src="images/panier.png" alt="panier" class="hover-image">
                     <div class="menu">
-                        <button class="total">Buy all : ${{ totalAmount }}</button>
+                        <button class="total">Total panier : ${{ totalPrice }}</button>
                     </div>
                 </div>
             </header>
@@ -28,50 +29,82 @@
                 <div class="element">
                     <img src="images/tee_shirt_vans.jpg" alt="vans">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemVans')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_carhartt.jpg" alt="carhartt">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemCarhartt')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_dickies.jpg" alt="dickies">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemDickies')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_lacoste.jpg" alt="lacoste">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemLacoste')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_tnf.jpg" alt="thenorthface">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemTnf')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_under_armour.jpg" alt="under_armour">
                     <button class="buy">Buy</button>
-                    <button class="cart">Add to cart</button>
+                    <button class="cart" @click="toggleItem('itemUnderArmour')">Add to cart</button>
                 </div>
             </main>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script>
             const app = new Vue({
                 el: '#app',
                 data: {
-                    costVans: 10,
-                    costCarhartt: 10,
-                    costDickies: 10,
-                    costLacoste: 15,
-                    costTnf: 15,
-                    costUnderArmour: 15,
+                    selectedItems: {
+                        itemVans: false,
+                        itemCarhartt: false,
+                        itemDickies: false,
+                        itemLacoste: false,
+                        itemTnf: false,
+                        itemUnderArmour: false
+                    },
+                    prices: {
+                        itemVans: 10,
+                        itemCarhartt: 10,
+                        itemDickies: 10,
+                        itemLacoste: 15,
+                        itemTnf: 15,
+                        itemUnderArmour: 15
+                    },
+                    totalPrice: 0
                 },
-                computed: {
-                    totalAmount(){
-                        return this.costVans + this.costCarhartt + this.costDickies + this.costLacoste + this.costTnf + this.costUnderArmour
+                methods: {
+                    toggleItem(item) {
+                        this.selectedItems[item] = !this.selectedItems[item];
+                        this.calculateTotal();
+                    },
+                    calculateTotal() {
+                        this.totalPrice = 0;
+                        if (this.selectedItems.itemVans) {
+                            this.totalPrice += this.prices.itemVans;
+                        }
+                        if (this.selectedItems.itemCarhartt) {
+                            this.totalPrice += this.prices.itemCarhartt;
+                        }
+                        if (this.selectedItems.itemDickies) {
+                            this.totalPrice += this.prices.itemDickies;
+                        }
+                        if (this.selectedItems.itemLacoste) {
+                            this.totalPrice += this.prices.itemLacoste;
+                        }
+                        if (this.selectedItems.itemTnf) {
+                            this.totalPrice += this.prices.itemTnf;
+                        }
+                        if (this.selectedItems.itemUnderArmour) {
+                            this.totalPrice += this.prices.itemUnderArmour;
+                        }
                     }
                 }
             })
