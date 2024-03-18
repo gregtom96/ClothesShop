@@ -87,23 +87,10 @@
                     },
                     calculateTotal() {
                         this.totalPrice = 0;
-                        if (this.selectedItems.itemVans) {
-                            this.totalPrice += this.prices.itemVans;
-                        }
-                        if (this.selectedItems.itemCarhartt) {
-                            this.totalPrice += this.prices.itemCarhartt;
-                        }
-                        if (this.selectedItems.itemDickies) {
-                            this.totalPrice += this.prices.itemDickies;
-                        }
-                        if (this.selectedItems.itemLacoste) {
-                            this.totalPrice += this.prices.itemLacoste;
-                        }
-                        if (this.selectedItems.itemTnf) {
-                            this.totalPrice += this.prices.itemTnf;
-                        }
-                        if (this.selectedItems.itemUnderArmour) {
-                            this.totalPrice += this.prices.itemUnderArmour;
+                        for(let item in this.selectedItems){
+                            if (this.selectedItems[item]) {
+                                this.totalPrice += this.prices[item];
+                            }
                         }
                     }
                 }
