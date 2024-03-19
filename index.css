@@ -70,9 +70,11 @@ main button{
     width: 95%;
     margin-bottom: 4px;
 }
-button[class="buy"]{
+/*bouton Pay*/
+.buy{
     background-color: yellow;
 }
-button[class="cart"]{
+/*bouton add to cart*/
+.cart{
     background-color: rgb(0, 145, 255);
 }
