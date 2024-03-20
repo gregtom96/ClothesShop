@@ -7,7 +7,6 @@
         <title>Shop</title>
         <link href="index.css" rel="stylesheet">
         <script src="menu_panier.js" defer></script>
-        <script src="functions.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +21,12 @@
                 <div class="panier">
                     <img src="images/panier.png" alt="panier" class="hover-image">
                     <div class="menu">
-                        <button class="total">Total panier : ${{ totalPrice }}</button>
                         <p>Your selection :</p>
+                            <div class="selection">
+                                <!--ici seront ajoutés les articles mis au panier-->
+                            </div>
+                        <p class="delete" v-on:click="deleteSelection()">Delete all</p>
+                        <button class="total">Total : {{ totalPrice }} €</button>
                     </div>
                 </div>
             </header>
@@ -80,6 +83,14 @@
                         itemTnf: 15,
                         itemUnderArmour: 15
                     },
+                    names: {
+                        itemVans: "Tee shirt Vans",
+                        itemCarhartt: "Tee shirt Carhartt",
+                        itemDickies: "Tee shirt Dickies",
+                        itemLacoste: "Tee shirt Lacoste",
+                        itemTnf: "Tee shirt The North Face",
+                        itemUnderArmour: "Tee shirt Under Armour"
+                    },
                     totalPrice: 0
                 },
                 methods: {
@@ -97,10 +108,22 @@
                         }
                     },
                     resumeSelection(item) {
-                        let baliseMenu = document.querySelector(".menu")
-                        let nouveauParagraphe = document.createElement("p")
-                        nouveauParagraphe.textContent = item
-                        baliseMenu.appendChild(nouveauParagraphe)
+                        let baliseSelection = document.querySelector(".selection")
+
+                        let nouveauSpan = document.createElement("span")
+                        nouveauSpan.textContent = this.names[item]
+                        baliseSelection.appendChild(nouveauSpan)    
+                        
+                        let nouveauBr = document.createElement("br")
+                        baliseSelection.appendChild(nouveauBr)
+                    },
+                    deleteSelection(){
+                        //Efface les articles mis dans le panier
+                        let baliseDelete = document.querySelector(".selection")
+                        baliseDelete.innerHTML = ``
+
+                        //Remet à 0 le prix total du panier
+                        this.totalPrice = 0
                     }
                 }
             })

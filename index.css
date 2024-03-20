@@ -30,6 +30,10 @@ img[alt="panier"]{
     padding: 10px;
     border: 1px solid #ccc;
 }
+.delete{
+    text-decoration: underline;
+    cursor: pointer;
+}
 button[class="total"]{
     background-color: yellow;
     width: 150px;
