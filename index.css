@@ -1,27 +1,28 @@
-header{
-	display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+body{
+    margin: 0;
+    padding: 0;
 }
-.titre{
-    grid-column-start: 2; 
-    margin: auto; 
-    text-align: center;
+header{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 h1{
-    font-family: "Delicious Handrawn", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 4em;
+    font-family: "Delicious Handrawn";
+    color: white;
 }
 .panier{
-    grid-column-start: 3;
-    margin: auto;
-    background-color: white;
+    background-color: black;
     position: relative;
     display: inline-block;
 }
 img[alt="panier"]{
     width: 30px;
+    filter: invert(100%);
 }
 .menu{
     display: none;
@@ -30,14 +31,16 @@ img[alt="panier"]{
     right: 50%;
     background-color: #fff;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.5);
     z-index: 2; /*supérieur au z-index du main donc apparaît devant*/
 }
 .delete{
     text-decoration: underline;
     cursor: pointer;
 }
-button[class="total"]{
+.total{
     background-color: yellow;
     width: 150px;
     height: 40px;
