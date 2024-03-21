@@ -6,7 +6,7 @@
         <link rel="icon" type="image/vnd.icon" href="images/favicon.ico">
         <title>Shop</title>
         <link href="index.css" rel="stylesheet">
-        <script src="menu_panier.js" defer></script>
+        <script src="hover_panier.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
                 <div class="panier">
                     <img src="images/panier.png" alt="panier" class="hover-image">
                     <div class="menu">
-                        <p>Your selection :</p>
+                        <span>Your selection :</span>
                             <div class="selection">
                                 <!--ici seront ajoutés les articles mis au panier-->
                             </div>
@@ -33,33 +33,63 @@
             <main>
                 <div class="element">
                     <img src="images/tee_shirt_vans.jpg" alt="vans">
+                    <span> 
+                        10€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart vans" @click="toggleItem('itemVans')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemVans')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_carhartt.jpg" alt="carhartt">
+                    <span> 
+                        10€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart" @click="toggleItem('itemCarhartt')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemCarhartt')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_dickies.jpg" alt="dickies">
+                    <span> 
+                        10€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart" @click="toggleItem('itemDickies')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemDickies')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_lacoste.jpg" alt="lacoste">
+                    <span> 
+                        15€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart" @click="toggleItem('itemLacoste')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemLacoste')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_tnf.jpg" alt="thenorthface">
+                    <span> 
+                        15€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart" @click="toggleItem('itemTnf')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemTnf')">Add to cart</button>
                 </div>
                 <div class="element">
                     <img src="images/tee_shirt_under_armour.jpg" alt="under_armour">
+                    <span> 
+                        15€ <br>
+                        Size : S <br>
+                        100% cotton <br>
+                    </span>
                     <button class="buy">Buy</button>
-                    <button class="cart" @click="toggleItem('itemUnderArmour')">Add to cart</button>
+                    <button class="cart" @click="addItemToCart('itemUnderArmour')">Add to cart</button>
                 </div>
             </main>
         </div>
@@ -67,13 +97,13 @@
             const app = new Vue({
                 el: '#app',
                 data: {
-                    selectedItems: {
-                        itemVans: false,
-                        itemCarhartt: false,
-                        itemDickies: false,
-                        itemLacoste: false,
-                        itemTnf: false,
-                        itemUnderArmour: false
+                    quantities: {
+                        itemVans: 0,
+                        itemCarhartt: 0,
+                        itemDickies: 0,
+                        itemLacoste: 0,
+                        itemTnf: 0,
+                        itemUnderArmour: 0
                     },
                     prices: {
                         itemVans: 10,
@@ -91,21 +121,21 @@
                         itemTnf: "Tee shirt The North Face",
                         itemUnderArmour: "Tee shirt Under Armour"
                     },
-                    totalPrice: 0
+                },
+                computed: {
+                    totalPrice(){
+                        return (this.quantities.itemVans * this.prices.itemVans)
+                        + (this.quantities.itemCarhartt * this.prices.itemCarhartt)
+                        + (this.quantities.itemDickies * this.prices.itemDickies)
+                        + (this.quantities.itemLacoste * this.prices.itemLacoste)
+                        + (this.quantities.itemTnf * this.prices.itemTnf)
+                        + (this.quantities.itemUnderArmour * this.prices.itemUnderArmour)
+                    }
                 },
                 methods: {
-                    toggleItem(item) {
-                        this.selectedItems[item] = !this.selectedItems[item];
-                        this.calculateTotal(); //on calcule le total du panier
-                        this.resumeSelection(item); //on affiche le nom du dernier article mis dans le panier
-                    },
-                    calculateTotal() {
-                        this.totalPrice = 0;
-                        for(let item in this.selectedItems){
-                            if (this.selectedItems[item]) {
-                                this.totalPrice += this.prices[item];
-                            }
-                        }
+                    addItemToCart(item) {
+                        this.quantities[item] += 1
+                        this.resumeSelection(item)
                     },
                     resumeSelection(item) {
                         let baliseSelection = document.querySelector(".selection")
@@ -123,7 +153,9 @@
                         baliseDelete.innerHTML = ``
 
                         //Remet à 0 le prix total du panier
-                        this.totalPrice = 0
+                        for(let item in this.quantities){
+                            this.quantities[item] = 0
+                        }
                     }
                 }
             })
