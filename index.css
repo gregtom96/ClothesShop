@@ -47,7 +47,7 @@ button[class="total"]{
 main{
     display: grid;
     grid-template-columns : 1fr 1fr 1fr; /*3 colonnes dont la 1ère 1.5 fois plus large*/
-	width : 60%;
+	width : 70%;
 	margin: auto;
 	gap : 6px;
 }
@@ -92,10 +92,12 @@ main button{
 @media screen and (max-width: 1000px){
     main{
         grid-template-columns : 1fr 1fr; 
+        width : 80%;
     }
 }
 @media screen and (max-width: 600px){
     main{
         grid-template-columns : 1fr; 
+        width : 90%;
     }
 }
