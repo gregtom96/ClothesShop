@@ -1,6 +1,7 @@
 header{
 	display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    
 }
 .titre{
     grid-column-start: 2; 
@@ -30,6 +31,7 @@ img[alt="panier"]{
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ccc;
+    z-index: 2; /*supérieur au z-index du main donc apparaît devant*/
 }
 .delete{
     text-decoration: underline;
@@ -46,10 +48,11 @@ button[class="total"]{
 }
 main{
     display: grid;
-    grid-template-columns : 1fr 1fr 1fr; /*3 colonnes dont la 1ère 1.5 fois plus large*/
+    grid-template-columns : 1fr 1fr 1fr; 
 	width : 70%;
 	margin: auto;
 	gap : 6px;
+    z-index: 1; /*inférieur au z-index de .menu donc apparaît derrière*/
 }
 .element{
     display: flex;
