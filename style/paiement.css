@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+header{
+    background-color: black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+h1{
+    font-family: "Delicious Handrawn";
+    color: white;
+}
+#paypal-button-container{
+    width: 500px;
+    margin: auto;
+}

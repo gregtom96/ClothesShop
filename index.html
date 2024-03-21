@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/vnd.icon" href="images/favicon.ico">
         <title>Shop</title>
-        <link href="index.css" rel="stylesheet">
-        <script src="hover_panier.js" defer></script>
+        <link href="style/index.css" rel="stylesheet">
+        <script src="scripts/hover_panier.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,10 +26,22 @@
                                 <!--ici seront ajoutés les articles mis au panier-->
                             </div>
                         <p class="delete" v-on:click="deleteSelection()">Delete all</p>
-                        <button class="total">Total : {{ totalPrice }} €</button>
+                        <button class="total" onclick="pay()">Total : {{ totalPrice }} €</button>
+                        <script>
+                            function pay() {
+                                window.open("pages/paiement.html", "_blank")
+                            }
+                        </script>
                     </div>
                 </div>
             </header>
+            <!--<form method="get" action="">
+                <label for="ordre">Filter</label><br> 
+                <select name="ordre" id="ordre">
+                    <option value="prixcroissant">Increasing Price</option>
+                    <option value="prixdecroissant">Decreasing Price</option>
+                </select>
+            </form>-->
             <main>
                 <div class="element">
                     <img src="images/tee_shirt_vans.jpg" alt="vans">
