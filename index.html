@@ -26,12 +26,7 @@
                                 <!--ici seront ajoutés les articles mis au panier-->
                             </div>
                         <p class="delete" v-on:click="deleteSelection()">Delete all</p>
-                        <button class="total" onclick="pay()">Total : {{ totalPrice }} €</button>
-                        <script>
-                            function pay() {
-                                window.open("pages/paiement.html", "_blank")
-                            }
-                        </script>
+                        <button class="total" v-on:click="pay()">Total : {{ totalPrice }} €</button>
                     </div>
                 </div>
             </header>
@@ -168,6 +163,9 @@
                         for(let item in this.quantities){
                             this.quantities[item] = 0
                         }
+                    },
+                    pay() {
+                        window.open("pages/paiement.html", "_blank")
                     }
                 }
             })
